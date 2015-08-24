@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load mezzanine_tags %}
+
+{% block title %}
+{{ widget.title }}
+{% endblock %}
+
+{% block main %}
+{% editable %}
+{{ widget.content | richtext_filters | safe }}
+{% endeditable %}
+{% endblock %}
