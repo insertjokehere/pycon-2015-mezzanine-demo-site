@@ -185,7 +185,7 @@ STATIC_URL = "/static/"
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_ROOT, STATIC_URL.strip("/"))
+STATIC_ROOT = CONFIG['django'].get('static_root', os.path.join(PROJECT_ROOT, STATIC_URL.strip("/")))
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -194,7 +194,7 @@ MEDIA_URL = STATIC_URL + "media/"
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
@@ -224,9 +224,9 @@ INSTALLED_APPS = (
     "mezzanine.core",
     "mezzanine.generic",
     "mezzanine.pages",
-    "mezzanine.blog",
+    #"mezzanine.blog",
     "mezzanine.forms",
-    "mezzanine.galleries",
+    #"mezzanine.galleries",
     # "mezzanine.twitter",
     # "mezzanine.accounts",
     # "mezzanine.mobile",
@@ -313,3 +313,4 @@ else:
 
 INSTALLED_APPS = ('pycon_demo.demo_site', 'pycon_demo.demo_theme') + INSTALLED_APPS
 
+SEARCH_MODEL_CHOICES = ('pages.Page', 'demo_site.Widget', 'demo_site.WidgetCategory', 'demo_site.TechnicalDocument')

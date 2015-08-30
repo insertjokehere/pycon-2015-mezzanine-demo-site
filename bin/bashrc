@@ -1,0 +1,2 @@
+export PYCON_DEMO_CONFIG="/opt/demo-site/pycon-demo.ini"
+export PATH="$PATH:/opt/demo-site/venv/bin"

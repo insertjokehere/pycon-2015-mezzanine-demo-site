@@ -1,0 +1,9 @@
+[django]
+static_root = /opt/demo-site/static
+
+[database]
+engine = django.db.backends.postgresql_psycopg2
+name = vagrant
+user = vagrant
+password =
+host =

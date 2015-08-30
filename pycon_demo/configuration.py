@@ -12,6 +12,7 @@ DEFAULT_CONFIGURATION = """
 secret_key = ae46a80a-8376-4e22-8f05-ff53cf2603c9ed0dacab-1382-4c1d-884c-2a3fe9d2a19a
 debug = True
 allowed_hosts = localhost
+static_root =
 
 [database]
 engine = django.db.backends.sqlite3

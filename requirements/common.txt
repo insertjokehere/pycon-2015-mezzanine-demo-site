@@ -1,1 +1,4 @@
 Mezzanine==4.0.1
+gunicorn
+psycopg2
+django-compressor
