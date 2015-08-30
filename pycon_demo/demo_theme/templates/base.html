@@ -61,7 +61,7 @@
     {% if settings.SITE_TAGLINE %}<p class="navbar-text visible-lg">{{ settings.SITE_TAGLINE }}</p>{% endif %}
 </div>
 <div class="navbar-collapse collapse">
-    {% search_form  %}
+    {% search_form %}
     {% page_menu "pages/menus/dropdown.html" %}
 </div>
 </div>
@@ -106,19 +106,9 @@
 </div>
 
 <div class="col-md-3 right">
-    {% nevercache %}
-    {% include "includes/language_selector.html" %}
-    {% include "includes/user_panel.html" %}
-    {% endnevercache %}
-    <div class="panel panel-default">
-    <div class="panel-body">
-    {% block right_panel %}
-    {% ifinstalled mezzanine.twitter %}
-    {% include "twitter/tweets.html" %}
-    {% endifinstalled %}
-    {% endblock %}
-    </div>
-    </div>
+  {% block right_panel %}
+
+  {% endblock %}
 </div>
 
 </div>

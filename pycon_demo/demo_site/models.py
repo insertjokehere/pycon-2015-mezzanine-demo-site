@@ -1,6 +1,7 @@
-from mezzanine.core.models import Displayable, Orderable
+from mezzanine.core.models import Displayable, Orderable, TimeStamped
 from mezzanine.core.fields import FileField
 from mezzanine.pages.models import Page, RichText
+from mezzanine.core.managers import PublishedManager
 from django.db import models
 
 
@@ -18,11 +19,12 @@ class Widget(Displayable, RichText):
         return self.category.get_absolute_url() + self.slug
 
 
-class TechnicalDocument(Orderable):
+class TechnicalDocument(Displayable, Orderable):
 
-    title = models.CharField(max_length=120)
+    objects = PublishedManager()
+
     document = FileField()
-    widget = models.ForeignKey(Widget)
+    widget = models.ForeignKey(Widget, related_name="documents")
 
     def __str__(self):
         return self.title

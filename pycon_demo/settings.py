@@ -314,3 +314,9 @@ else:
 INSTALLED_APPS = ('pycon_demo.demo_site', 'pycon_demo.demo_theme') + INSTALLED_APPS
 
 SEARCH_MODEL_CHOICES = ('pages.Page', 'demo_site.Widget', 'demo_site.WidgetCategory', 'demo_site.TechnicalDocument')
+
+# django-debug-toolbar checks META['REMOTE_ADDR'], but we are using nginx to proxy to a socket
+# so REMOTE_ADDR isn't set. Need to override the default check
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': 'pycon_demo.show_debug_toolbar'
+}

@@ -1,0 +1,24 @@
+{% extends 'pages/page.html' %}
+
+{% load mezzanine_tags %}
+
+{% block title %}
+{% editable page.employee.title page.employee.position %}
+{{ page.employee.title }}
+<small>{{ page.employee.position }}</small>
+{% endeditable %}
+{% endblock %}
+
+{% block right_panel %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <img src="{{ MEDIA_URL }}{{ page.employee.photo }}" />
+  </div>
+</div>
+{% endblock %}
+
+{% block main %}
+{% editable page.employee.content %}
+{{ page.employee.content |richtext_filters|safe }}
+{% endeditable %}
+{% endblock %}

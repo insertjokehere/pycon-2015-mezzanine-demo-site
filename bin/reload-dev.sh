@@ -6,15 +6,17 @@ cd $(dirname $0)/../
 
 . /opt/demo-site/venv/bin/activate
 
+pip install -r requirements/dev.txt
+
 supervisorctl stop all
 
-dropdb vagrant || true
-createdb vagrant
+#dropdb vagrant || true
+#createdb vagrant
 
 pycon_demo syncdb --noinput
 
-echo "from django.contrib.auth.models import User; " \
-     "User.objects.create_superuser('vagrant', 'vagrant@example.com', 'vagrant')" | pycon_demo shell --plain > /dev/null
+#echo "from django.contrib.auth.models import User; " \
+#     "User.objects.create_superuser('vagrant', 'vagrant@example.com', 'vagrant')" | pycon_demo shell --plain > /dev/null
 
 pycon_demo collectstatic --link --noinput
 

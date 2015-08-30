@@ -1,12 +1,37 @@
 {% extends 'base.html' %}
 {% load mezzanine_tags %}
 
+{# The pages <title> #}
+{% block meta_title %}
+{{ widget.title }}
+{% endblock %}
+
+{# The large title on the page #}
 {% block title %}
 {{ widget.title }}
 {% endblock %}
 
+{# the main content of the page #}
 {% block main %}
-{% editable %}
+{% editable widget.content %}
 {{ widget.content | richtext_filters | safe }}
 {% endeditable %}
 {% endblock %}
+
+  {% block right_panel %}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>Documents</h4>
+
+      <ul>
+	{% for d in documents %}
+	<li>
+	  <a href="{{ d.document.url }}">
+	    {{ d.title }}
+	  </a>
+	</li>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endblock %}

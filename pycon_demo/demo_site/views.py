@@ -1,4 +1,5 @@
 from django.views.generic.base import TemplateView
+from mezzanine.pages.page_processors import processor_for
 from . import models
 
 
@@ -10,6 +11,7 @@ class WidgetCategoryView(TemplateView):
         context = super(WidgetCategoryView, self).get_context_data(**kwargs)
         context['category'] = models.WidgetCategory.objects.get(slug=kwargs['category_slug'])
         context['widgets'] = models.Widget.objects.filter(category=context['category'])
+        context['editable_obj'] = context['category']
         return context
 
 
@@ -23,4 +25,15 @@ class WidgetView(TemplateView):
                                                            .get(slug=kwargs['category_slug'])
         context['widget'] = context['category'].widget_set.published(for_user=self.request.user)\
                                                           .get(slug=kwargs['widget_slug'])
+
+        context['documents'] = context['widget'].documents.published(for_user=self.request.user)
+        context['editable_obj'] = context['widget']
         return context
+
+
+@processor_for('widgets')
+def widgets_index(request, page):
+    if request.method == 'GET':
+        return {'categories': models.WidgetCategory.objects.published()}
+    else:
+        return {}

@@ -8,6 +8,8 @@ import copy
 class TechnicalDocumentInline(TabularDynamicInlineAdmin):
     model = models.TechnicalDocument
 
+    fields = ('title', 'document', 'publish_date', 'expiry_date', 'status')
+
 widget_fieldsets = copy.deepcopy(DisplayableAdmin.fieldsets)
 widget_fieldsets[0][1]["fields"].insert(1, "category")
 widget_fieldsets[0][1]["fields"].insert(1, "content")
