@@ -42,10 +42,9 @@ exec { 'develop':  # Install our code as a module in the venv
 }
 ->
 exec { 'reload-dev':  # reload-dev.sh runs migrate etc
-  command     => '/vagrant/bin/reload-dev.sh',
-  user        => vagrant,
-  refreshonly => true,
-  require     => File['/opt/demo-site/pycon-demo.ini']
+  command => '/vagrant/bin/reload-dev.sh',
+  user    => vagrant,
+  require => File['/opt/demo-site/pycon-demo.ini']
 }
 
 file {'/opt/demo-site/pycon-demo.ini':
