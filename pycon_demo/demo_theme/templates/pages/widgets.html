@@ -5,23 +5,23 @@
 {% block main %}
 {{ block.super }}
 
+{% regroup widgets by category as categories %}
+
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   {% for category in categories %}
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="{{ category.slug }}-header">
+    <div class="panel-heading" role="tab" id="{{ category.grouper.slug }}-header">
       <h4 class="panel-title">
-	<a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+	<a href="{{ category.grouper.get_absolute_url }}">{{ category.grouper.title }}</a>
       </h4>
     </div>
-    <div id="{{ category.slug }}">
+    <div id="{{ category.grouper.slug }}">
       <div class="panel-body">
 	<ul>
-	  {% for widget in category.widget_set.published %}
+	  {% for widget in category.list %}
 	  <li>
 	    <a href="{{ widget.get_absolute_url }}">
-	      {% editable widget.title %}
 	      {{ widget.title }}
-	      {% endeditable %}
 	    </a>
 	  </li>
 	  {% endfor %}

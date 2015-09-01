@@ -10,7 +10,8 @@ class WidgetCategoryView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(WidgetCategoryView, self).get_context_data(**kwargs)
         context['category'] = models.WidgetCategory.objects.get(slug=kwargs['category_slug'])
-        context['widgets'] = models.Widget.objects.filter(category=context['category'])
+        context['widgets'] = models.Widget.objects.published(for_user=self.request.user)\
+                                                  .filter(category=context['category'])
         context['editable_obj'] = context['category']
         return context
 
@@ -34,6 +35,8 @@ class WidgetView(TemplateView):
 @processor_for('widgets')
 def widgets_index(request, page):
     if request.method == 'GET':
-        return {'categories': models.WidgetCategory.objects.published()}
+        return {
+            'widgets': models.Widget.objects.published(for_user=request.user)
+        }
     else:
         return {}

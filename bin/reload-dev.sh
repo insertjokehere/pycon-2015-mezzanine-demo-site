@@ -19,4 +19,8 @@ pycon_demo loaddata ./fixtures/site_data.json
 
 pycon_demo collectstatic --link --noinput
 
+mkdir -p /opt/pycon-demo/static/media/uploads
+
+cp ./fixtures/*.{jpg,png} /opt/pycon-demo/static/media/uploads 
+
 supervisorctl start all

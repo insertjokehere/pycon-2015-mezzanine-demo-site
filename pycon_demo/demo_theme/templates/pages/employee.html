@@ -12,7 +12,7 @@
 {% block right_panel %}
 <div class="panel panel-default">
   <div class="panel-body">
-    <img src="{{ MEDIA_URL }}{{ page.employee.photo }}" />
+    <img src="{{ MEDIA_URL }}{% thumbnail page.employee.photo 200 0 %}" />
   </div>
 </div>
 {% endblock %}

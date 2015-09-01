@@ -16,7 +16,7 @@ exec {'apt-get update':
   command => '/usr/bin/apt-get update'
 }
 ->
-package {['python3-pip', 'supervisor', 'python3-all', 'python3-setuptools', 'python3-dev', 'build-essential', 'htop']:
+package {['python3-pip', 'supervisor', 'python3-all', 'python3-setuptools', 'python3-dev', 'build-essential', 'htop', 'libjpeg8', 'libjpeg8-dev']:
   ensure  => installed,
   require => Exec['apt-get update']
 }
@@ -43,7 +43,7 @@ exec { 'develop':  # Install our code as a module in the venv
 ->
 exec { 'reload-dev':  # reload-dev.sh runs migrate etc
   command     => '/vagrant/bin/reload-dev.sh',
-  user        => root,
+  user        => vagrant,
   refreshonly => true,
   require     => File['/opt/demo-site/pycon-demo.ini']
 }
